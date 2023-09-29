@@ -1,30 +1,23 @@
-import React from 'react';
+import { ITask } from "../../types/task";
+import style from "./List.module.scss";
+import Item from "./item";
 
-function List() {
-    return (
-        <aside>
-            <h2>Estudos do dia</h2>
-            <ul>
-                <li>
-                    <h3>
-                        React
-                    </h3>
-                    <span>
-                        02:00:00
-                    </span>
-                </li>
-                <li>
-                    <h3>
-                       JavaScript 
-                    </h3>
-                    <span>
-                       01:00:00 
-                    </span>
-                </li>
-            </ul>
+interface Props {
+  task: ITask[];
+  selectTask: (taskSelected: ITask) => void;
+}
 
-        </aside>
-    )
+function List({ task, selectTask }: Props) {
+  return (
+    <aside className={style.listaTarefas}>
+      <h2>Estudos do dia</h2>
+      <ul>
+        {task.map((item) => (
+          <Item selectTask={selectTask} key={item.id} {...item} />
+        ))}
+      </ul>
+    </aside>
+  );
 }
 
 export default List;
